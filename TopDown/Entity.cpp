@@ -1,0 +1,30 @@
+#include "Entity.h"
+
+
+
+
+Entity::Entity(std::string textureName = "NoTexture", float xPos = 0, float yPos = 0)
+{
+	Entity::textureName = textureName;
+	Entity::xPos = xPos;
+	Entity::yPos = yPos;
+	Entity::texture.loadFromFile(textureName);
+}
+
+
+void Entity::CreateSprite()
+{
+	Entity::sprite.setTexture(Entity::texture, true);
+	Entity::sprite.setPosition(Entity::xPos, Entity::yPos);
+}
+
+
+void Entity::GoSide(int side)
+{
+
+}
+
+
+Entity::~Entity()
+{
+}
