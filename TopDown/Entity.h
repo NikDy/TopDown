@@ -6,7 +6,6 @@ class Entity
 {
 public:
 	Entity(std::string, float, float);
-	void GoSide(int);
 	sf::Sprite sprite;
 	~Entity();
 private:
