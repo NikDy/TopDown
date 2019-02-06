@@ -19,13 +19,13 @@ void Player::WatchTarget(float x, float y)
 void Player::GoSide(int side)
 {
 	if (side == 0) Entity::sprite.move(10, 0);
-	if (side == 1) Entity::sprite.move(7.07, 7.07);
+	if (side == 1) Entity::sprite.move(2.5, 2.5);
 	if (side == 2) Entity::sprite.move(0, 10);
-	if (side == 3) Entity::sprite.move(-7.07, 7.07);
+	if (side == 3) Entity::sprite.move(-2.5, 2.5);
 	if (side == 4) Entity::sprite.move(-10, 0);
-	if (side == 5) Entity::sprite.move(-7.07, -7.07);
+	if (side == 5) Entity::sprite.move(-2.5, -2.5);
 	if (side == 6) Entity::sprite.move(0, -10);
-	if (side == 7) Entity::sprite.move(7.07, -7.07);
+	if (side == 7) Entity::sprite.move(2.5, -2.5);
 }
 
 Player::~Player()

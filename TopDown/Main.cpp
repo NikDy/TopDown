@@ -18,23 +18,15 @@ int main()
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
-			if (event.type == sf::Event::KeyPressed)
-			{
-				if (event.key.code == sf::Keyboard::D)
-				{
-					if (event.key.code == sf::Keyboard::S) player.GoSide(7);
-					if (event.key.code == sf::Keyboard::W) player.GoSide(1);
-					else player.GoSide(0);
-				}
-				if (event.key.code == sf::Keyboard::A)
-				{
-					if (event.key.code == sf::Keyboard::S) player.GoSide(5);
-					if (event.key.code == sf::Keyboard::W) player.GoSide(3);
-					else player.GoSide(4);
-				}
-				if (event.key.code == sf::Keyboard::W) player.GoSide(6);
-				if (event.key.code == sf::Keyboard::S) player.GoSide(2);
-			}
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && sf::Keyboard::isKeyPressed(sf::Keyboard::S)) player.GoSide(3);
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && sf::Keyboard::isKeyPressed(sf::Keyboard::S)) player.GoSide(1);
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && sf::Keyboard::isKeyPressed(sf::Keyboard::W)) player.GoSide(7);
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && sf::Keyboard::isKeyPressed(sf::Keyboard::W)) player.GoSide(5);
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) player.GoSide(0);
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) player.GoSide(2);
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) player.GoSide(4);
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) player.GoSide(6);
 		}
 
 
