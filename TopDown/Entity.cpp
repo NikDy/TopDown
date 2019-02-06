@@ -9,6 +9,7 @@ Entity::Entity(std::string textureName = "NoTexture", float xPos = 0, float yPos
 	Entity::xPos = xPos;
 	Entity::yPos = yPos;
 	Entity::texture.loadFromFile(textureName);
+	Entity::CreateSprite();
 }
 
 

@@ -7,13 +7,13 @@ class Entity
 public:
 	Entity(std::string, float, float);
 	void GoSide(int);
-	void CreateSprite();
+	sf::Sprite sprite;
 	~Entity();
 private:
+	void CreateSprite();
 	std::string textureName;
 	float xPos;
 	float yPos;
 	sf::Texture texture;
-	sf::Sprite sprite;
 };
 
