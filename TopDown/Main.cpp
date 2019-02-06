@@ -1,13 +1,15 @@
 #include "SFML/Window.hpp"
 #include "SFML/System.hpp"
-#include "Entity.h"
+#include "Player.h"
+#include <iostream>
 
 int main()
 {
 	sf::RenderWindow window;
 	window.create(sf::VideoMode(800, 600), "My window");
 	
-	Entity player = Entity("D:/SFML Project/TopDown/x64/Debug/Actor.png", 50, 50);
+	Player player = Player("D:/SFML Project/TopDown/x64/Debug/Actor.png", 400, 300, -50);
+	player.sprite.setOrigin(25, 25);
 
 	while (window.isOpen())
 	{
@@ -27,6 +29,7 @@ int main()
 
 
 		window.clear();
+		player.WatchTarget(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
 		window.draw(player.sprite);
 		window.display();
 
