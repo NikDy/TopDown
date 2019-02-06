@@ -10,6 +10,7 @@ int main()
 	
 	Player player = Player("D:/SFML Project/TopDown/x64/Debug/Actor.png", 400, 300, -50);
 	player.sprite.setOrigin(25, 25);
+	sf::Clock clock;
 
 	while (window.isOpen())
 	{
@@ -19,6 +20,11 @@ int main()
 			if (event.type == sf::Event::Closed)
 				window.close();
 
+			
+		}
+
+		if (clock.getElapsedTime().asMilliseconds() > 15.0f)
+		{
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && sf::Keyboard::isKeyPressed(sf::Keyboard::S)) player.GoSide(3);
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && sf::Keyboard::isKeyPressed(sf::Keyboard::S)) player.GoSide(1);
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && sf::Keyboard::isKeyPressed(sf::Keyboard::W)) player.GoSide(7);
@@ -27,13 +33,13 @@ int main()
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) player.GoSide(2);
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) player.GoSide(4);
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) player.GoSide(6);
+			player.WatchTarget(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
+			window.clear(sf::Color(244, 164, 96, 255));
+			window.draw(player.sprite);
+			window.display();
+			clock.restart();
 		}
 
-
-		window.clear();
-		player.WatchTarget(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
-		window.draw(player.sprite);
-		window.display();
 
 	}
 
