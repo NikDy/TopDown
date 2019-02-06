@@ -22,8 +22,18 @@ int main()
 			{
 				if (event.key.code == sf::Keyboard::D)
 				{
-					player.GoSide(0);
+					if (event.key.code == sf::Keyboard::S) player.GoSide(7);
+					if (event.key.code == sf::Keyboard::W) player.GoSide(1);
+					else player.GoSide(0);
 				}
+				if (event.key.code == sf::Keyboard::A)
+				{
+					if (event.key.code == sf::Keyboard::S) player.GoSide(5);
+					if (event.key.code == sf::Keyboard::W) player.GoSide(3);
+					else player.GoSide(4);
+				}
+				if (event.key.code == sf::Keyboard::W) player.GoSide(6);
+				if (event.key.code == sf::Keyboard::S) player.GoSide(2);
 			}
 		}
 
