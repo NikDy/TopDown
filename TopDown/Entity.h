@@ -11,8 +11,9 @@ public:
 private:
 	void CreateSprite();
 	std::string textureName;
+	sf::Texture texture;
+protected:
 	float xPos;
 	float yPos;
-	sf::Texture texture;
 };
 

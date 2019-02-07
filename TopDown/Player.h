@@ -7,8 +7,9 @@ class Player :
 public:
 	Player(std::string , float , float , float);
 	~Player();
-	void GoSide(int);
-	void WatchTarget(float, float);
+	void goSide(int);
+	void watchTarget(float, float);
+	void shootBullet();
 private:
 	float angle;
 };
