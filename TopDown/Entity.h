@@ -13,6 +13,7 @@ private:
 	std::string textureName;
 	sf::Texture texture;
 protected:
+	void updatePosition();
 	float xPos;
 	float yPos;
 };

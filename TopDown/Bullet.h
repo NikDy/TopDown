@@ -5,8 +5,9 @@ class Bullet :
 {
 public:
 	Bullet(std::string, float, float, float, float, float);
-	void checkEveryFrame();
+	Bullet& checkEveryFrame();
 	~Bullet();
+	bool deleted;
 private:
 	float speed;
 	float angle;

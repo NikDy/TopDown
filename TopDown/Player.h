@@ -1,5 +1,6 @@
 #pragma once
 #include "Entity.h"
+#include "Bullet.h"
 #include <math.h>
 class Player :
 	public Entity
@@ -9,7 +10,7 @@ public:
 	~Player();
 	void goSide(int);
 	void watchTarget(float, float);
-	void shootBullet();
+	Bullet shootBullet();
 private:
 	float angle;
 };
