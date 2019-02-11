@@ -6,7 +6,7 @@
 #include <vector>
 #include <algorithm>
 #include <list>
-
+#include "Enemy.h"
 
 int main()
 {
@@ -14,9 +14,9 @@ int main()
 	window.create(sf::VideoMode(800, 600), "My window");
 	
 	Player player = Player("D:/SFML Project/TopDown/x64/Debug/Actor.png", 400, 300, -50);
+	Enemy enemy = Enemy("D:/SFML Project/TopDown/x64/Debug/Actor.png", 400, 300, -50);
+	Enemy enemy2 = Enemy("D:/SFML Project/TopDown/x64/Debug/Actor.png", 100, 200, -50);
 
-
-	player.sprite.setOrigin(25, 25);
 
 	sf::Clock clock;
 	std::list<Bullet> bulletList;
@@ -55,8 +55,12 @@ int main()
 			{
 				window.draw(bullet.checkEveryFrame().sprite);
 			}
+			enemy.runAI(player);
 			player.watchTarget(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
+			if (player.checkCollision(enemy)) 
+				window.draw(enemy2.sprite);
 			window.draw(player.sprite);
+			window.draw(enemy.sprite);
 			window.display();
 			clock.restart();
 		}

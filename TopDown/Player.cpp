@@ -4,6 +4,7 @@
 Player::Player(std::string textureName = "NoTexture", float xPos = 0, float yPos = 0, float angle = 0) : Entity(textureName, xPos, yPos)
 {
 	Player::angle = angle;
+	Entity::sprite.setOrigin(Entity::sprite.getTextureRect().height / 2, Entity::sprite.getTextureRect().width / 2);
 	Entity::sprite.setRotation(Player::angle);
 }
 

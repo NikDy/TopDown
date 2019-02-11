@@ -31,6 +31,14 @@ float Entity::getyPos()
 }
 
 
+bool Entity::checkCollision(Entity target)
+{
+	if (((xPos - target.getxPos())*(xPos - target.getxPos()) + (yPos - target.getyPos())*(xPos - target.getyPos()))
+		<= (sprite.getTextureRect().height / 2 + target.sprite.getTextureRect().height / 2)) return true;
+	else return false;
+}
+
+
 void Entity::updatePosition()
 {
 	Entity::sprite.setPosition(Entity::xPos, Entity::yPos);

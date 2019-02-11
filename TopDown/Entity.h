@@ -8,6 +8,7 @@ class Entity
 
 public:
 	Entity(std::string, float, float);
+	bool checkCollision(Entity);
 	float getxPos();
 	float getyPos();
 	sf::Sprite sprite;

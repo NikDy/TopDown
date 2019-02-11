@@ -8,7 +8,9 @@ public:
 	void runAI(Entity);
 	~Enemy();
 private:
+	void moveForward();
 	void watchTarget(Entity);
+	float speed = 0.8;
 	float angle;
 };
 
