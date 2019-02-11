@@ -11,7 +11,7 @@ Player::Player(std::string textureName = "NoTexture", float xPos = 0, float yPos
 
 void Player::watchTarget(float x, float y)
 {
-	Player::angle = atan2f((x - sprite.getPosition().x - 25), (sprite.getPosition().y - 25 - y)) * (180.0 / 3.141592653589793238463);
+	Player::angle = atan2f((x - sprite.getPosition().x), (sprite.getPosition().y - y)) * (180.0 / 3.141592653589793238463);
 	Entity::sprite.setRotation(Player::angle);
 }
 

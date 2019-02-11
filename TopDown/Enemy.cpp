@@ -26,7 +26,7 @@ void Enemy::moveForward()
 
 void Enemy::watchTarget(Entity target)
 {
-	Enemy::angle = atan2f((target.getxPos() - sprite.getPosition().x - 25), (sprite.getPosition().y - 25 - target.getyPos())) * (180.0 / 3.141592653589793238463);
+	Enemy::angle = atan2f((target.getxPos() - sprite.getPosition().x), (sprite.getPosition().y - target.getyPos())) * (180.0 / 3.141592653589793238463);
 	Entity::sprite.setRotation(Enemy::angle);
 }
 
