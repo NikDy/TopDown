@@ -4,6 +4,8 @@
 #pragma once
 class Entity
 {
+	sf::Texture texture;
+
 public:
 	Entity(std::string, float, float);
 	sf::Sprite sprite;
@@ -11,7 +13,6 @@ public:
 private:
 	void CreateSprite();
 	std::string textureName;
-	sf::Texture texture;
 protected:
 	void updatePosition();
 	float xPos;

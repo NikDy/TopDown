@@ -30,7 +30,9 @@ void Player::goSide(int side)
 
 Bullet Player::shootBullet()
 {
-	return Bullet::Bullet("D:/SFML Project/TopDown/x64/Debug/Bullet.png", this->xPos, this->yPos, this->angle, 25, 350);
+	Bullet bullet = Bullet::Bullet("D:/SFML Project/TopDown/x64/Debug/Bullet.png", this->xPos, this->yPos, this->angle, 25, 350);
+	return bullet;
+	//return Bullet::Bullet("D:/SFML Project/TopDown/x64/Debug/Bullet.png", this->xPos, this->yPos, this->angle, 25, 350);
 }
 
 Player::~Player()
