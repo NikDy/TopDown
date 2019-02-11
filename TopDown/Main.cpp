@@ -54,11 +54,12 @@ int main()
 			if (!bulletList.empty()) for (auto &bullet : bulletList)
 			{
 				window.draw(bullet.checkEveryFrame().sprite);
+				if (enemy.checkCollision(bullet))
+					window.draw(enemy2.sprite);
 			}
 			enemy.runAI(player);
 			player.watchTarget(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
-			if (player.checkCollision(enemy)) 
-				window.draw(enemy2.sprite);
+			
 			window.draw(player.sprite);
 			window.draw(enemy.sprite);
 			window.display();
