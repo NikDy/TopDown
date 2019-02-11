@@ -5,8 +5,10 @@ class Enemy :
 {
 public:
 	Enemy(std::string , float, float, float);
+	void runAI(Entity);
 	~Enemy();
 private:
+	void watchTarget(Entity);
 	float angle;
 };
 

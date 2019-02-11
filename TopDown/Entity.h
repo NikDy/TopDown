@@ -8,6 +8,8 @@ class Entity
 
 public:
 	Entity(std::string, float, float);
+	float getxPos();
+	float getyPos();
 	sf::Sprite sprite;
 	~Entity();
 private:

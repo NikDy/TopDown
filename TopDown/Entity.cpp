@@ -18,6 +18,19 @@ void Entity::CreateSprite()
 	Entity::sprite.setPosition(Entity::xPos, Entity::yPos);
 }
 
+
+float Entity::getxPos()
+{
+	return Entity::xPos;
+}
+
+
+float Entity::getyPos()
+{
+	return Entity::yPos;
+}
+
+
 void Entity::updatePosition()
 {
 	Entity::sprite.setPosition(Entity::xPos, Entity::yPos);
