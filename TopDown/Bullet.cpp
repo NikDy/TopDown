@@ -2,7 +2,7 @@
 #include <functional>
 
 
-Bullet::Bullet(std::string textureName = "D:/SFML Project/TopDown/x64/Debug/Bullet.png", float xPos = 0, float yPos = 0, float angle = 0, float speed = 0, float lifetime = 0) : Entity(textureName, xPos, yPos)
+Bullet::Bullet(sf::Texture texture, float xPos = 0, float yPos = 0, float angle = 0, float speed = 0, float lifetime = 0) : Entity(texture, xPos, yPos)
 {
 	this->angle = angle;
 	this->speed = speed;

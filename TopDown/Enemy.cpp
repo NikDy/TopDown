@@ -2,10 +2,11 @@
 
 
 
-Enemy::Enemy(std::string textureName = "NoTexture", float xPos = 0, float yPos = 0, float angle = 0) : Entity(textureName, xPos, yPos)
+Enemy::Enemy(sf::Texture texture, float xPos = 0, float yPos = 0, float angle = 0) : Entity(texture, xPos, yPos)
 {
 	Entity::sprite.setOrigin(Entity::sprite.getTextureRect().height / 2, Entity::sprite.getTextureRect().width / 2);
 	Entity::sprite.setColor(sf::Color(0, 100, 0));
+	Enemy::deleted = false;
 }
 
 
@@ -13,6 +14,7 @@ void Enemy::runAI(Entity target)
 {
 	Enemy::watchTarget(target);
 	Enemy::moveForward();
+	//if(checkCollision())
 }
 
 

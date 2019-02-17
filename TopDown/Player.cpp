@@ -1,11 +1,12 @@
 #include "Player.h"
 
 
-Player::Player(std::string textureName = "NoTexture", float xPos = 0, float yPos = 0, float angle = 0) : Entity(textureName, xPos, yPos)
+Player::Player(sf::Texture texture, float xPos = 0, float yPos = 0, float angle = 0) : Entity(texture, xPos, yPos)
 {
 	Player::angle = angle;
 	Entity::sprite.setOrigin(Entity::sprite.getTextureRect().height / 2, Entity::sprite.getTextureRect().width / 2);
 	Entity::sprite.setRotation(Player::angle);
+	Player::deleted = false;
 }
 
 
@@ -19,21 +20,22 @@ void Player::watchTarget(float x, float y)
 void Player::goSide(int side)
 {
 	if (side == 0)	 Entity::xPos += 10;
-	if (side == 1) { Entity::xPos += 2.5; Entity::yPos += 2.5;}
+	if (side == 1) { Entity::xPos += 1.5; Entity::yPos += 1.5;}
 	if (side == 2)   Entity::yPos += 10;
-	if (side == 3) { Entity::xPos -= 2.5; Entity::yPos += 2.5; }
+	if (side == 3) { Entity::xPos -= 1.5; Entity::yPos += 1.5; }
 	if (side == 4)   Entity::xPos -= 10;
-	if (side == 5) { Entity::xPos -= 2.5; Entity::yPos -= 2.5; }
+	if (side == 5) { Entity::xPos -= 1.5; Entity::yPos -= 1.5; }
 	if (side == 6)   Entity::yPos -= 10;
-	if (side == 7) { Entity::xPos += 2.5; Entity::yPos -= 2.5; }
+	if (side == 7) { Entity::xPos += 1.5; Entity::yPos -= 1.5; }
 	Entity::updatePosition();
 }
 
 Bullet Player::shootBullet()
 {
-	Bullet bullet = Bullet::Bullet("D:/SFML Project/TopDown/x64/Debug/Bullet.png", this->xPos, this->yPos, this->angle, 25, 350);
+	sf::Texture bulletTexture;
+	bulletTexture.loadFromFile("D:/SFML Project/TopDown/x64/Debug/Bullet.png");
+	Bullet bullet = Bullet::Bullet(bulletTexture, this->xPos, this->yPos, this->angle, 25, 350);
 	return bullet;
-	//return Bullet::Bullet("D:/SFML Project/TopDown/x64/Debug/Bullet.png", this->xPos, this->yPos, this->angle, 25, 350);
 }
 
 Player::~Player()

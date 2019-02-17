@@ -6,11 +6,12 @@ class Player :
 	public Entity
 {
 public:
-	Player(std::string , float , float , float);
+	Player(sf::Texture, float , float , float);
 	~Player();
 	void goSide(int);
 	void watchTarget(float, float);
 	Bullet shootBullet();
+	bool deleted;
 private:
 	float angle;
 };

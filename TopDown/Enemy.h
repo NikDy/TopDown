@@ -4,8 +4,9 @@ class Enemy :
 	public Entity
 {
 public:
-	Enemy(std::string , float, float, float);
+	Enemy(sf::Texture, float, float, float);
 	void runAI(Entity);
+	bool deleted;
 	~Enemy();
 private:
 	void moveForward();

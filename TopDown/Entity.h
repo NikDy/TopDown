@@ -7,7 +7,7 @@ class Entity
 	sf::Texture texture;
 
 public:
-	Entity(std::string, float, float);
+	Entity(sf::Texture, float, float);
 	bool checkCollision(Entity);
 	float getxPos();
 	float getyPos();
@@ -15,7 +15,6 @@ public:
 	~Entity();
 private:
 	void CreateSprite();
-	std::string textureName;
 protected:
 	void updatePosition();
 	float xPos;

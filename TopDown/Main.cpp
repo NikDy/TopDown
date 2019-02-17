@@ -13,14 +13,16 @@ int main()
 	sf::RenderWindow window;
 	window.create(sf::VideoMode(800, 600), "My window");
 	
-	Player player = Player("D:/SFML Project/TopDown/x64/Debug/Actor.png", 400, 300, -50);
-	Enemy enemy = Enemy("D:/SFML Project/TopDown/x64/Debug/Actor.png", 400, 300, -50);
-	Enemy enemy2 = Enemy("D:/SFML Project/TopDown/x64/Debug/Actor.png", 100, 200, -50);
+	sf::Texture playerTexture;
+	playerTexture.loadFromFile("D:/SFML Project/TopDown/x64/Debug/Actor.png");
+	Player player = Player(playerTexture, 400, 300, -50);
 	int cooldown = 0;
+	int enemyOnScreen = 0;
+
 
 	sf::Clock clock;
 	std::list<Bullet> bulletList;
-
+	std::list<Enemy> enemyList;
 
 	while (window.isOpen())
 	{
@@ -28,6 +30,8 @@ int main()
 		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
+				window.close();
+			if (player.deleted)
 				window.close();
 		}
 
@@ -43,7 +47,13 @@ int main()
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) player.goSide(4);
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) player.goSide(6);
 			
+			while (enemyOnScreen <= 3)
+			{
+				enemyList.emplace_back(Enemy(playerTexture, rand() % 800, rand() % 20, 0));
+				enemyOnScreen++;
+			}
 
+			window.clear(sf::Color(244, 164, 96, 255));
 
 
 			if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && cooldown >= 200)
@@ -51,19 +61,29 @@ int main()
 				bulletList.push_back(player.shootBullet());
 				cooldown = 0;
 			}
-			bulletList.remove_if([](Bullet n) { return n.deleted == true; });
-			window.clear(sf::Color(244, 164, 96, 255));
 			if (!bulletList.empty()) for (auto &bullet : bulletList)
 			{
 				window.draw(bullet.checkEveryFrame().sprite);
-				if (enemy.checkCollision(bullet))
-					window.draw(enemy2.sprite);
+				for (auto &enemy : enemyList)
+				{
+					if (enemy.checkCollision(bullet))
+					{
+						enemy.deleted = true;
+						bullet.deleted = true;
+						enemyOnScreen--;
+					}
+				}
 			}
-			//enemy.runAI(player);
+			bulletList.remove_if([](Bullet n) { return n.deleted == true; });
+			enemyList.remove_if([](Enemy n) { return n.deleted == true; });
+			if (!enemyList.empty()) for (auto &enemy : enemyList)
+			{
+				enemy.runAI(player);
+				window.draw(enemy.sprite);
+				if (enemy.checkCollision(player)) player.deleted = true;
+			}
 			player.watchTarget(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
-			
 			window.draw(player.sprite);
-			window.draw(enemy.sprite);
 			window.display();
 			clock.restart();
 		}

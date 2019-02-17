@@ -4,7 +4,7 @@ class Bullet :
 	public Entity
 {
 public:
-	Bullet(std::string, float, float, float, float, float);
+	Bullet(sf::Texture, float, float, float, float, float);
 	Bullet& checkEveryFrame();
 	~Bullet();
 	bool deleted;
