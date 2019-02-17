@@ -8,13 +8,13 @@
 #include <list>
 #include "Enemy.h"
 
+
 int main()
 {
 	sf::RenderWindow window;
 	window.create(sf::VideoMode(800, 600), "My window");
-	
 	sf::Texture playerTexture;
-	playerTexture.loadFromFile("D:/SFML Project/TopDown/x64/Debug/Actor.png");
+	playerTexture.loadFromFile("Actor.png");
 	Player player = Player(playerTexture, 400, 300, -50);
 	int cooldown = 0;
 	int enemyOnScreen = 0;

@@ -33,7 +33,7 @@ void Player::goSide(int side)
 Bullet Player::shootBullet()
 {
 	sf::Texture bulletTexture;
-	bulletTexture.loadFromFile("D:/SFML Project/TopDown/x64/Debug/Bullet.png");
+	bulletTexture.loadFromFile("Bullet.png");
 	Bullet bullet = Bullet::Bullet(bulletTexture, this->xPos, this->yPos, this->angle, 25, 350);
 	return bullet;
 }

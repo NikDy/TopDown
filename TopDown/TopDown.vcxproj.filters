@@ -44,5 +44,24 @@
     <ClInclude Include="Enemy.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TopDown.rc">
+      <Filter>Файлы ресурсов</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Actor.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="Bullet.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="NoTexture.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
   </ItemGroup>
 </Project>

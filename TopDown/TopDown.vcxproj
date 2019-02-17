@@ -146,6 +146,15 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TopDown.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Actor.png" />
+    <Image Include="Bullet.png" />
+    <Image Include="NoTexture.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
