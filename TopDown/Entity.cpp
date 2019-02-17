@@ -33,8 +33,7 @@ float Entity::getyPos()
 
 bool Entity::checkCollision(Entity target)
 {
-	if (((xPos - target.getxPos())*(xPos - target.getxPos()) + (yPos - target.getyPos())*(xPos - target.getyPos()))
-		<= (sprite.getTextureRect().height / 2 + target.sprite.getTextureRect().height / 2)) return true;
+	if(Entity::sprite.getGlobalBounds().intersects(target.sprite.getGlobalBounds())) return true;
 	else return false;
 }
 

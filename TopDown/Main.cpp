@@ -16,7 +16,7 @@ int main()
 	Player player = Player("D:/SFML Project/TopDown/x64/Debug/Actor.png", 400, 300, -50);
 	Enemy enemy = Enemy("D:/SFML Project/TopDown/x64/Debug/Actor.png", 400, 300, -50);
 	Enemy enemy2 = Enemy("D:/SFML Project/TopDown/x64/Debug/Actor.png", 100, 200, -50);
-
+	int cooldown = 0;
 
 	sf::Clock clock;
 	std::list<Bullet> bulletList;
@@ -33,6 +33,7 @@ int main()
 
 		if (clock.getElapsedTime().asMilliseconds() > 15.0f)
 		{
+			cooldown += 15;
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && sf::Keyboard::isKeyPressed(sf::Keyboard::S)) player.goSide(3);
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && sf::Keyboard::isKeyPressed(sf::Keyboard::S)) player.goSide(1);
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && sf::Keyboard::isKeyPressed(sf::Keyboard::W)) player.goSide(7);
@@ -41,13 +42,14 @@ int main()
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) player.goSide(2);
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) player.goSide(4);
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) player.goSide(6);
+			
 
 
 
-
-			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && cooldown >= 200)
 			{
 				bulletList.push_back(player.shootBullet());
+				cooldown = 0;
 			}
 			bulletList.remove_if([](Bullet n) { return n.deleted == true; });
 			window.clear(sf::Color(244, 164, 96, 255));
@@ -57,7 +59,7 @@ int main()
 				if (enemy.checkCollision(bullet))
 					window.draw(enemy2.sprite);
 			}
-			enemy.runAI(player);
+			//enemy.runAI(player);
 			player.watchTarget(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
 			
 			window.draw(player.sprite);
