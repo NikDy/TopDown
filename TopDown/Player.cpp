@@ -1,6 +1,5 @@
 #include "Player.h"
 
-
 Player::Player(sf::Texture texture, float xPos = 0, float yPos = 0, float angle = 0) : Entity(texture, xPos, yPos)
 {
 	Player::angle = angle;
@@ -30,11 +29,9 @@ void Player::goSide(int side)
 	Entity::updatePosition();
 }
 
-Bullet Player::shootBullet()
+Bullet Player::shootBullet(sf::Texture texture)
 {
-	sf::Texture bulletTexture;
-	bulletTexture.loadFromFile("Bullet.png");
-	Bullet bullet = Bullet::Bullet(bulletTexture, this->xPos, this->yPos, this->angle, 25, 350);
+	Bullet bullet = Bullet::Bullet(texture, this->xPos, this->yPos, this->angle, 25, 350);
 	return bullet;
 }
 

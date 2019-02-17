@@ -1,6 +1,8 @@
 #include <string>
 #include "SFML\System.hpp"
 #include "SFML\Graphics.hpp"
+#include "ResourseLoader.h"
+
 #pragma once
 class Entity
 {

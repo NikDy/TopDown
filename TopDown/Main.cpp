@@ -7,18 +7,23 @@
 #include <algorithm>
 #include <list>
 #include "Enemy.h"
-
+#include "ResourseLoader.h"
 
 int main()
 {
 	sf::RenderWindow window;
 	window.create(sf::VideoMode(800, 600), "My window");
-	sf::Texture playerTexture;
-	playerTexture.loadFromFile("Actor.png");
-	Player player = Player(playerTexture, 400, 300, -50);
+
+	
+	ResourseLoader loader;
+
+	loader.load("Actor.png");
+	loader.load("Bullet.png");
+	loader.load("NoTexture.png");
+
+	Player player = Player(loader.getTextureByName("Actor.png"), 400, 300, -50);
 	int cooldown = 0;
 	int enemyOnScreen = 0;
-
 
 	sf::Clock clock;
 	std::list<Bullet> bulletList;
@@ -49,7 +54,7 @@ int main()
 			
 			while (enemyOnScreen <= 3)
 			{
-				enemyList.emplace_back(Enemy(playerTexture, rand() % 800, rand() % 20, 0));
+				enemyList.emplace_back(Enemy(loader.getTextureByName("Actor.png"), rand() % 800, rand() % 20, 0));
 				enemyOnScreen++;
 			}
 
@@ -58,7 +63,7 @@ int main()
 
 			if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && cooldown >= 200)
 			{
-				bulletList.push_back(player.shootBullet());
+				bulletList.push_back(player.shootBullet(loader.getTextureByName("Bullet.png")));
 				cooldown = 0;
 			}
 			if (!bulletList.empty()) for (auto &bullet : bulletList)

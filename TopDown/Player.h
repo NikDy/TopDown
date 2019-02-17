@@ -10,7 +10,7 @@ public:
 	~Player();
 	void goSide(int);
 	void watchTarget(float, float);
-	Bullet shootBullet();
+	Bullet shootBullet(sf::Texture);
 	bool deleted;
 private:
 	float angle;
