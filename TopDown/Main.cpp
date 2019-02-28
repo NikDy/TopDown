@@ -3,7 +3,6 @@
 #include "Player.h"
 #include <iostream>
 #include "Bullet.h"
-#include <vector>
 #include <algorithm>
 #include <list>
 #include "Enemy.h"
@@ -12,7 +11,7 @@
 int main()
 {
 	sf::RenderWindow window;
-	window.create(sf::VideoMode(800, 600), "My window");
+	window.create(sf::VideoMode(800, 600), "The game");
 
 	
 	ResourseLoader loader;
@@ -24,6 +23,16 @@ int main()
 	Player player = Player(loader.getTextureByName("Actor.png"), 400, 300, -50);
 	int cooldown = 0;
 	int enemyOnScreen = 0;
+	int killsPoints = 0;
+
+	sf::Font font;
+	font.loadFromFile("ARIAL.TTF");
+	sf::Text killsText;
+	killsText.setFont(font);
+	killsText.setFillColor(sf::Color::Black);
+	killsText.setString(std::to_string(killsPoints));
+	killsText.setCharacterSize(20);
+
 
 	sf::Clock clock;
 	std::list<Bullet> bulletList;
@@ -52,9 +61,16 @@ int main()
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) player.goSide(4);
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) player.goSide(6);
 			
-			while (enemyOnScreen <= 3)
+			while (enemyOnScreen < 3)
 			{
-				enemyList.emplace_back(Enemy(loader.getTextureByName("Actor.png"), rand() % 800, rand() % 20, 0));
+				float x = rand() % 800, y = rand() % 600;
+				while (!((x >= player.getxPos() + 50) || (x <= player.getxPos() - 50)) ||
+					   !((y >= player.getyPos() + 50) || (y <= player.getyPos() - 50)))
+				{
+					x = rand() % 800;
+					y = rand() % 600;
+				}
+				enemyList.emplace_back(Enemy(loader.getTextureByName("Actor.png"), x, y, 0));
 				enemyOnScreen++;
 			}
 
@@ -76,6 +92,7 @@ int main()
 						enemy.deleted = true;
 						bullet.deleted = true;
 						enemyOnScreen--;
+						killsPoints++;
 					}
 				}
 			}
@@ -89,6 +106,8 @@ int main()
 			}
 			player.watchTarget(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
 			window.draw(player.sprite);
+			killsText.setString(std::to_string(killsPoints));
+			window.draw(killsText);
 			window.display();
 			clock.restart();
 		}
