@@ -11,7 +11,7 @@ public:
 private:
 	void moveForward();
 	void watchTarget(Entity);
-	float speed = 0.8;
+	float speed = 1.0;
 	float angle;
 };
 

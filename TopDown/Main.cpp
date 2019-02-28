@@ -12,7 +12,7 @@ int main()
 {
 	sf::RenderWindow window;
 	window.create(sf::VideoMode(800, 600), "The game");
-
+	window.setVerticalSyncEnabled(true);
 	
 	ResourseLoader loader;
 
@@ -35,8 +35,12 @@ int main()
 
 
 	sf::Clock clock;
+	sf::Time elapsed = clock.restart(); 
+	const sf::Time update_ms = sf::milliseconds(30.0f);
 	std::list<Bullet> bulletList;
 	std::list<Enemy> enemyList;
+
+
 
 	while (window.isOpen())
 	{
@@ -49,7 +53,32 @@ int main()
 				window.close();
 		}
 
-		if (clock.getElapsedTime().asMilliseconds() > 15.0f)
+
+
+		elapsed += clock.restart();
+		if (elapsed.asMilliseconds() >= update_ms.asMilliseconds())
+		{
+			while (enemyOnScreen < 10)
+			{
+				float x = rand() % 800, y = rand() % 600;
+				while (!((x >= player.getxPos() + 50) || (x <= player.getxPos() - 50)) ||
+					!((y >= player.getyPos() + 50) || (y <= player.getyPos() - 50)))
+				{
+					x = rand() % 800;
+					y = rand() % 600;
+				}
+				enemyList.emplace_back(Enemy(loader.getTextureByName("Actor.png"), x, y, 0));
+				enemyOnScreen++;
+			}
+
+			if (!enemyList.empty()) for (auto &enemy : enemyList)
+			{
+				enemy.runAI(player);
+			}
+			elapsed -= update_ms;
+		}
+
+		if (elapsed.asMilliseconds() >  update_ms.asMilliseconds() / 2.0f)
 		{
 			cooldown += 15;
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && sf::Keyboard::isKeyPressed(sf::Keyboard::S)) player.goSide(3);
@@ -61,18 +90,7 @@ int main()
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) player.goSide(4);
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) player.goSide(6);
 			
-			while (enemyOnScreen < 3)
-			{
-				float x = rand() % 800, y = rand() % 600;
-				while (!((x >= player.getxPos() + 50) || (x <= player.getxPos() - 50)) ||
-					   !((y >= player.getyPos() + 50) || (y <= player.getyPos() - 50)))
-				{
-					x = rand() % 800;
-					y = rand() % 600;
-				}
-				enemyList.emplace_back(Enemy(loader.getTextureByName("Actor.png"), x, y, 0));
-				enemyOnScreen++;
-			}
+			
 
 			window.clear(sf::Color(244, 164, 96, 255));
 
@@ -100,7 +118,6 @@ int main()
 			enemyList.remove_if([](Enemy n) { return n.deleted == true; });
 			if (!enemyList.empty()) for (auto &enemy : enemyList)
 			{
-				enemy.runAI(player);
 				window.draw(enemy.sprite);
 				if (enemy.checkCollision(player)) player.deleted = true;
 			}
@@ -109,7 +126,6 @@ int main()
 			killsText.setString(std::to_string(killsPoints));
 			window.draw(killsText);
 			window.display();
-			clock.restart();
 		}
 	}
 

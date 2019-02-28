@@ -18,13 +18,13 @@ void Player::watchTarget(float x, float y)
 
 void Player::goSide(int side)
 {
-	if (side == 0)	 Entity::xPos += 10;
+	if (side == 0)	 Entity::xPos += 5;
 	if (side == 1) { Entity::xPos += 1.5; Entity::yPos += 1.5;}
-	if (side == 2)   Entity::yPos += 10;
+	if (side == 2)   Entity::yPos += 5;
 	if (side == 3) { Entity::xPos -= 1.5; Entity::yPos += 1.5; }
-	if (side == 4)   Entity::xPos -= 10;
+	if (side == 4)   Entity::xPos -= 5;
 	if (side == 5) { Entity::xPos -= 1.5; Entity::yPos -= 1.5; }
-	if (side == 6)   Entity::yPos -= 10;
+	if (side == 6)   Entity::yPos -= 5;
 	if (side == 7) { Entity::xPos += 1.5; Entity::yPos -= 1.5; }
 	Entity::updatePosition();
 }
