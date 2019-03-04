@@ -2,6 +2,7 @@
 #include "SFML\System.hpp"
 #include "SFML\Graphics.hpp"
 #include "ResourseLoader.h"
+#include <iostream>
 
 #pragma once
 class Entity
@@ -14,7 +15,7 @@ public:
 	float getxPos();
 	float getyPos();
 	sf::Sprite sprite;
-	~Entity();
+	virtual ~Entity();
 private:
 	void CreateSprite();
 protected:

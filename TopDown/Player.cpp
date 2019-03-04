@@ -29,9 +29,9 @@ void Player::goSide(int side)
 	Entity::updatePosition();
 }
 
-Bullet Player::shootBullet(sf::Texture texture)
+Bullet* Player::shootBullet(sf::Texture texture)
 {
-	Bullet bullet = Bullet::Bullet(texture, this->xPos, this->yPos, this->angle, 25, 350);
+	Bullet* bullet = new Bullet(texture, this->xPos, this->yPos, this->angle, 25, 350);
 	return bullet;
 }
 

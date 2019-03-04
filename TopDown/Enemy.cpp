@@ -14,7 +14,6 @@ void Enemy::runAI(Entity target)
 {
 	Enemy::watchTarget(target);
 	Enemy::moveForward();
-	//if(checkCollision())
 }
 
 

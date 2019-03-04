@@ -37,8 +37,8 @@ int main()
 	sf::Clock clock;
 	sf::Time elapsed = clock.restart(); 
 	const sf::Time update_ms = sf::milliseconds(30.0f);
-	std::list<Bullet> bulletList;
-	std::list<Enemy> enemyList;
+	std::list<Bullet*> bulletList;
+	std::list<Enemy*> enemyList;
 
 
 
@@ -67,13 +67,13 @@ int main()
 					x = rand() % 800;
 					y = rand() % 600;
 				}
-				enemyList.emplace_back(Enemy(loader.getTextureByName("Actor.png"), x, y, 0));
+				enemyList.emplace_back(new Enemy(loader.getTextureByName("Actor.png"), x, y, 0));
 				enemyOnScreen++;
 			}
 
-			if (!enemyList.empty()) for (auto &enemy : enemyList)
+			if (!enemyList.empty()) for (auto enemy : enemyList)
 			{
-				enemy.runAI(player);
+				enemy->runAI(player);
 			}
 			elapsed -= update_ms;
 		}
@@ -100,26 +100,26 @@ int main()
 				bulletList.push_back(player.shootBullet(loader.getTextureByName("Bullet.png")));
 				cooldown = 0;
 			}
-			if (!bulletList.empty()) for (auto &bullet : bulletList)
+			if (!bulletList.empty()) for (auto bullet : bulletList)
 			{
-				window.draw(bullet.checkEveryFrame().sprite);
-				for (auto &enemy : enemyList)
+				window.draw(bullet->checkEveryFrame().sprite);
+				for (auto enemy : enemyList)
 				{
-					if (enemy.checkCollision(bullet))
+					if (enemy->checkCollision(*bullet))
 					{
-						enemy.deleted = true;
-						bullet.deleted = true;
+						enemy->deleted = true;
+						bullet->deleted = true;
 						enemyOnScreen--;
 						killsPoints++;
 					}
 				}
 			}
-			bulletList.remove_if([](Bullet n) { return n.deleted == true; });
-			enemyList.remove_if([](Enemy n) { return n.deleted == true; });
-			if (!enemyList.empty()) for (auto &enemy : enemyList)
+			bulletList.remove_if([](Bullet *n) { return n->deleted == true; });
+			enemyList.remove_if([](Enemy *n){ return n->deleted == true; });
+			if (!enemyList.empty()) for (auto enemy : enemyList)
 			{
-				window.draw(enemy.sprite);
-				if (enemy.checkCollision(player)) player.deleted = true;
+				window.draw(enemy->sprite);
+				if (enemy->checkCollision(player)) player.deleted = true;
 			}
 			player.watchTarget(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
 			window.draw(player.sprite);
